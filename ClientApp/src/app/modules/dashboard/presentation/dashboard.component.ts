@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { OrderFormComponent } from './order-form/order-form.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  isNewForm: boolean = false;
+
+  constructor(
+    private dialogRef : MatDialog
+  ) {}
+
+  openForm(): void {
+  this.dialogRef.open(OrderFormComponent)
+  }
 
 }
+
+

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LoginService } from '../data/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
   });
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private route: Router
   ) {
 
   }
@@ -25,6 +27,10 @@ export class LoginComponent {
   submitForm(): void { 
     console.warn(this.profileForm.value);
     this.loginService.registerUser(this.profileForm.controls.username.getRawValue(),this.profileForm.controls.password.getRawValue())
+  }
+
+  skipToDashboard(): void { 
+    this.route.navigate(['dashboard']);
   }
 
 }

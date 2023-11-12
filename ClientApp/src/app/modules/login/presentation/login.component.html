@@ -1,6 +1,9 @@
 <nav>
     <button type="button" (click)="isRegistrationForm = false">Log in</button>
     <button type="button" (click)="isRegistrationForm = true">Sing up</button>
+    <!--Disable for prod-->
+    <button type="button" (click)="skipToDashboard()">Skip to dashboard</button>
+    <!--Disable for prod-->
 </nav>
 
 <div *ngIf="!isRegistrationForm">
