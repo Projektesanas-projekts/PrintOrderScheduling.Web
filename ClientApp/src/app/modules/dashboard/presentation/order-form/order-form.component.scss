@@ -1,0 +1,34 @@
+.popup {
+    width: 100%;
+    text-align: center;
+    height: auto;
+}
+
+.order-form {
+    display: inline-block;
+    padding: 20px; 
+    margin: 10px; 
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; 
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between; 
+    padding-bottom: 5px; 
+}
+
+.form-header span {
+    width: calc(25% - 10px);
+    text-align: center; 
+}
+
+
+.align-right {
+    display: flex;
+    justify-content: flex-end;
+  }

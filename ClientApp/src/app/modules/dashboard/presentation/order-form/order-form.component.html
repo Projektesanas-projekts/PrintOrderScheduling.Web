@@ -1,12 +1,19 @@
-<div>
-    <button type="button" (click)="closeForm()">Close</button>
-    <form>
-
-        <label for="first-name">Username: </label>
-        <input id="first-name" type="text" >
-      
-        <label for="last-name">Password: </label>
-        <input id="last-name" type="text">
-      
+<div class="popup">
+  <div class="align-right">
+    <button type="button" (click)="closeForm()">X</button>
+  </div>
+    <div class="order-form">
+      <div class="form-header">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </div>
+      <form>
+          <input id="first-name" type="text" >   
+          <input id="last-name" type="text">
+          <input id="last-name" type="text">
+          <input id="last-name" type="text">
       </form>
+    </div>
 </div>

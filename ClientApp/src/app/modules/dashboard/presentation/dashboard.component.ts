@@ -15,7 +15,9 @@ export class DashboardComponent {
   ) {}
 
   openForm(): void {
-  this.dialogRef.open(OrderFormComponent)
+  this.dialogRef.open(OrderFormComponent, {
+    width: '800px',
+    height: '600px'})
   }
 
 }
