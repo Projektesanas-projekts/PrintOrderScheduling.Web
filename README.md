@@ -1,5 +1,11 @@
 # PrintOrderScheduling.Web
-How to run Web app locally:
+<i>
+Never push changes directly to MASTER branch!<br>
+Create your own branch, commit changes, create a MERGE REQUEST, and wait until another person approves it!<br>
+It helps to keep the main branch clean and prevent unexpected errors. Thank you!<br></i>
+
+
+<h1>How to run Web app locally:</h1>
 
 1. [Install Node.js](https://nodejs.org/en/download/)
 
