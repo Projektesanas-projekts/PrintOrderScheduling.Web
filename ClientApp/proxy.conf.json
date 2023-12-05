@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+       "target": "hiype.id.lv:8080/api",
+       "secure": false,
+       "pathRewrite": {"^/api" : ""}
+     }
+   }

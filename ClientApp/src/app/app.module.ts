@@ -1,31 +1,32 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './modules/dashboard/presentation/dashboard.component';
-import { LoginComponent } from './modules/login/presentation/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OrderFormComponent } from './modules/dashboard/presentation/order-form/order-form.component';
+import {ReactiveFormsModule} from '@angular/forms'
+import { AuthGuard } from './guards/auth.guard';
+import {FormsModule} from '@angular/forms'
+import { ProductServiceModule } from './modules/product-service/product-service.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     LoginComponent,
-    OrderFormComponent
+    ProductListComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatDialogModule
+    FormsModule,
+    ProductServiceModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { DashboardComponent } from './modules/dashboard/presentation/dashboard.component';
-import { LoginComponent } from './modules/login/presentation/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent }
-  // ... other routes
+  {path: '', component:ProductListComponent, pathMatch:'full', canActivate: [AuthGuard]},
+  {path: 'login', component:LoginComponent},
+  {path: 'products', component:ProductListComponent, canActivate: [AuthGuard]},
+  {
+    path: 'service',
+    loadChildren: () => import('./modules/product-service/product-service.module').then(m => m.ProductServiceModule),
+    canLoad: [AuthGuard]
+  },
+  {path: '**', component:ProductListComponent, pathMatch:'full', canActivate: [AuthGuard]}
 ];
 
 @NgModule({
