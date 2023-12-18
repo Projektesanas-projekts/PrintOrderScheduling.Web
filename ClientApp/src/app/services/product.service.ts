@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 export class ProductService {
   private apiUrl = 'https://fakestoreapi.com';
   private authSecretKey = 'Bearer Token';
+
+  private currentProduct = new BehaviorSubject<any>(null);
+  currentProduct$ = this.currentProduct.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -21,19 +24,16 @@ export class ProductService {
 
   getProducts() : Observable<any[]>{
     const headers = this.getHeaders();
-    // For test purpose
-    this.logIn();
-    
+
     return this.http.get<any[]>(`${this.apiUrl}/products`, { headers });
   }
 
-  logIn(): void {
-    let mockData: {username: string, password: string};
-    mockData = {
-      username: "Ass",
-      password: "Hole"
-    };
-
+  selectProduct(product: any) {
+    this.currentProduct.next(product);
+  }
+  
+  logIn(username: string, password: string): void {
+    let mockData = [username, password];
     this.http.post("http://hiype.id.lv:8080/api/user/create", mockData).subscribe((response: any) => {
       console.log(response);
     });

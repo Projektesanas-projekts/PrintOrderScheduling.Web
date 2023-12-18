@@ -1,3 +1,4 @@
+<!-- TODO: Styling -->
 <table class="table table-bordered border-primary">
     <thead *ngIf="productData != null">
       <tr>
@@ -9,11 +10,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of productData">
+      <tr *ngFor="let product of productData" (click)="selectProduct(product)">
         <th scope="row">{{product.id}}</th>
         <td>{{product.title}}</td>
         <td>{{product.description}}</td>
-        <td>{{product.price | currency}}</td>
+        <td>{{product.price }}</td>
         <td>{{product.category}}</td>
       </tr>
     </tbody>

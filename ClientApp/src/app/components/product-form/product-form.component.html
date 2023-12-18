@@ -1,0 +1,17 @@
+<!-- TODO: Styling -->
+<form [formGroup]="productForm" >
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="title" formControlName="title">
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <textarea type="text" id="description" formControlName="description" rows="4" cols="50"></textarea>
+  </div>
+  <div>
+    <label for="name">Price:</label>
+    <input type="text" id="price" formControlName="price">
+  </div>
+  <button type="submit">Save</button>
+  <button type="button" (click)="closeModal()">Close</button>
+</form>

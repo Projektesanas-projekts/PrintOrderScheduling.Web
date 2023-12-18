@@ -11,12 +11,16 @@ import {ReactiveFormsModule} from '@angular/forms'
 import { AuthGuard } from './guards/auth.guard';
 import {FormsModule} from '@angular/forms'
 import { ProductServiceModule } from './modules/product-service/product-service.module';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProductListComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,8 @@ import { ProductServiceModule } from './modules/product-service/product-service.
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ProductServiceModule
+    ProductServiceModule,
+    MatDialogModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

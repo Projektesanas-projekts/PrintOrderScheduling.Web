@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-product-list',
@@ -7,18 +9,31 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  constructor(private productService : ProductService){}
+  constructor(
+    private productService : ProductService,
+    private dialogRef : MatDialog
+    ){}
 
   productData : any;
+  isProductSelected: boolean = false;
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(
       (data: any[]) => {
         this.productData = data;
-      },
-      (error) => {
-        console.error('Error fetching products:', error);
       }
     );
   }
+
+  openModal() {
+    this.dialogRef.open(ProductFormComponent, {
+      width: '1000px',
+    });
+  }
+
+  selectProduct(product: any) {
+    this.productService.selectProduct(product);
+    this.openModal()
+  }
+
 }
