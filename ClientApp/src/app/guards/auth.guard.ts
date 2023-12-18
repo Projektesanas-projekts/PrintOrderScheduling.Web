@@ -32,7 +32,7 @@ export class AuthGuard {
       return true;
     } else {
       // Redirect to the login page if the user is not authenticated
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
       return false;
     }
   }
