@@ -24,7 +24,6 @@ export class ProductService {
 
   getProducts() : Observable<any[]>{
     const headers = this.getHeaders();
-
     return this.http.get<any[]>(`${this.apiUrl}/products`, { headers });
   }
 
@@ -34,7 +33,8 @@ export class ProductService {
   
   logIn(username: string, password: string): void {
     let mockData = [username, password];
-    this.http.post("http://hiype.id.lv:8080/api/user/create", mockData).subscribe((response: any) => {
+    
+    this.http.post("localhost:8080/api/user/create", mockData).subscribe((response: any) => {
       console.log(response);
     });
   }
