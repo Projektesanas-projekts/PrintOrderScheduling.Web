@@ -13,6 +13,7 @@ import {FormsModule} from '@angular/forms'
 import { ProductServiceModule } from './modules/product-service/product-service.module';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     ProductListComponent,
     ProductFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
