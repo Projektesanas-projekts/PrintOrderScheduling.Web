@@ -23,6 +23,7 @@ export class ProductService {
   }
 
   getProducts() : Observable<any[]>{
+    this.logIn("fgedh", "fgdhrj")
     const headers = this.getHeaders();
     return this.http.get<any[]>(`${this.apiUrl}/products`, { headers });
   }
@@ -32,12 +33,15 @@ export class ProductService {
   }
   
   logIn(username: string, password: string): void {
-    let mockData = [username, password];
-    
-    this.http.post("localhost:8080/api/user/create", mockData).subscribe((response: any) => {
+    let formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    this.http.post("http://localhost:8080/api/user/create", formData).subscribe((response: any) => {
       console.log(response);
     });
-  }
+}
+
 
   getProductDetailById(id : number){
     const headers = this.getHeaders();
