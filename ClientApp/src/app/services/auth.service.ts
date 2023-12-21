@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,12 @@ export class AuthService {
   private isAuthenticated = false;
   private authSecretKey = 'Bearer Token';
 
-  constructor() { 
+  private logInState = new BehaviorSubject<any>(false);
+  logInState$ = this.logInState.asObservable();
+
+  constructor(
+    private http: HttpClient
+  ) { 
     this.isAuthenticated = !!localStorage.getItem(this.authSecretKey);
   }
   
@@ -22,6 +29,38 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  logIn(username: string, password: string): any {
+    let formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    this.http.post("http://localhost:8080/api/user/authenticate", formData).subscribe((response: any) => {
+      this.logInState.next(response)
+      if(response) {
+        const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
+        localStorage.setItem(this.authSecretKey, authToken);
+        this.isAuthenticated = true;
+      }
+      console.log(response)
+    });
+  }
+  
+  addUser(username: string, password: string): void {
+    let formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    this.http.post("http://localhost:8080/api/user/create", formData).subscribe((response: any) => {
+      this.logInState.next(response)
+      if(response) {
+        const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
+        localStorage.setItem(this.authSecretKey, authToken);
+        this.isAuthenticated = true;
+      }
+      console.log(response)
+    });
   }
 
   isAuthenticatedUser(): boolean {
