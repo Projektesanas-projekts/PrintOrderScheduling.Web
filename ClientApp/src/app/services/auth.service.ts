@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -14,23 +15,12 @@ export class AuthService {
   logInState$ = this.logInState.asObservable();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr: ToastrService
   ) { 
     this.isAuthenticated = !!localStorage.getItem(this.authSecretKey);
   }
   
-  login(username: string, password: string): boolean {
-    //Mock login data
-    if (username === '123' && password === '123') {
-      const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
-      localStorage.setItem(this.authSecretKey, authToken);
-      this.isAuthenticated = true;
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   logIn(username: string, password: string): any {
     let formData = new FormData();
     formData.append('username', username);
@@ -41,9 +31,11 @@ export class AuthService {
       if(response) {
         const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
         localStorage.setItem(this.authSecretKey, authToken);
+        this.toastr.success("Welcome, " + username + "!");
         this.isAuthenticated = true;
+      } else {
+        this.toastr.error("Wrong username or password!");
       }
-      console.log(response)
     });
   }
   
@@ -51,15 +43,13 @@ export class AuthService {
     let formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-
     this.http.post("http://localhost:8080/api/user/create", formData).subscribe((response: any) => {
-      this.logInState.next(response)
       if(response) {
         const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
         localStorage.setItem(this.authSecretKey, authToken);
         this.isAuthenticated = true;
       }
-      console.log(response)
+      this.logInState.next(response)
     });
   }
 
@@ -70,5 +60,6 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.authSecretKey);
     this.isAuthenticated = false;
+    this.logInState.next(false)
   }
 }

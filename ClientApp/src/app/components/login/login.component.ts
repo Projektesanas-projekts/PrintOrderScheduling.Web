@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
-import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -37,7 +38,7 @@ export class LoginComponent {
       if(state) {
         this.router.navigate(['/product-list']);
       }
-    })
+    });
   }
 
   onSubmit(): void {
@@ -49,6 +50,7 @@ export class LoginComponent {
         this.authService.addUser(this.registerForm.get('username').value, this.registerForm.get('password').value)
       } else {
         this.registerPasswordMismatch = true;
+        this.toastr.error("Password mismatch or whatever, change me later");
       }
     }
   }

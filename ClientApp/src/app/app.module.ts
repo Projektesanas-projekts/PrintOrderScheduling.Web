@@ -13,7 +13,8 @@ import {FormsModule} from '@angular/forms'
 import { ProductServiceModule } from './modules/product-service/product-service.module';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     FormsModule,
     ProductServiceModule,
-    MatDialogModule
+    MatDialogModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-center-center',
+    }),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
