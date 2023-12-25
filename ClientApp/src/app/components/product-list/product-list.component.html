@@ -1,21 +1,27 @@
-<!-- TODO: Styling -->
-<table class="table table-bordered border-primary">
-    <thead *ngIf="productData != null">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Price</th>
-        <th scope="col">Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of productData" (click)="selectProduct(product)">
-        <th scope="row">{{product.id}}</th>
-        <td>{{product.title}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.price }}</td>
-        <td>{{product.category}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div *ngIf="isLoading" class="center">
+    <book-loader></book-loader>
+  </div>
+  
+  <div *ngIf="!isLoading">
+    <table class="table table-bordered border-primary">
+      <thead *ngIf="productData != null">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price</th>
+          <th scope="col">Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productData" (click)="selectProduct(product)">
+          <th scope="row">{{product.id}}</th>
+          <td>{{product.title}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.price }}</td>
+          <td>{{product.category}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

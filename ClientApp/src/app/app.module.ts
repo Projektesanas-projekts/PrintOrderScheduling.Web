@@ -15,6 +15,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { BookLoaderComponent } from './helpers/book-loader/book-loader.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BookLoaderComponent,
     ReactiveFormsModule,
     FormsModule,
     ProductServiceModule,

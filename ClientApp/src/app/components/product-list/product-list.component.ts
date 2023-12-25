@@ -6,7 +6,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
   constructor(
@@ -16,11 +16,15 @@ export class ProductListComponent {
 
   productData : any;
   isProductSelected: boolean = false;
+  isLoading: boolean = true;
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(
       (data: any[]) => {
         this.productData = data;
+        setTimeout(()=> {
+          this.isLoading = false;
+        }, 4000);
       }
     );
   }
