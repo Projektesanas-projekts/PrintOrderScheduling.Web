@@ -8,7 +8,13 @@ import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {    
-  constructor(private authService: AuthService, private router : Router) {}
+  isLoggedIn: boolean = false;
+
+  constructor(private authService: AuthService, private router : Router) {
+    this.authService.logInState$.subscribe((val: boolean) => {
+      this.isLoggedIn = val;
+    })
+  }
 
   logout(): void {
     this.authService.logout();

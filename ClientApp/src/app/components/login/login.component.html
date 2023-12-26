@@ -1,45 +1,58 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
 <ng-container *ngIf="!showRegistrationWindow; then logInWindow"></ng-container>
 <ng-container *ngIf="showRegistrationWindow; then registerWindow"></ng-container>
 
-<ng-template #logInWindow class="container">
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-6">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="form-group text-light mt-5 display-5">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter username">
+<ng-template #logInWindow >
+    <div class="container">
+      <h2>Login Form</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-item">
+              <span class="material-icons-outlined">
+                  account_circle
+                  </span>
+              <input type="text" name="text" id="text" formControlName="username" placeholder="Username or email">
           </div>
-          <div class="form-group text-light display-5 mt-5">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+          <div class="form-item">
+              <span class="material-icons-outlined">                   
+                  lock
+                  </span>
+              <input type="password" name="pass" id="pass" formControlName="password" placeholder="Password">
+
           </div>
-          <button type="submit" class="btn btn-primary mt-4" >Sign in</button>
-          <button (click)="showRegistrationWindow = true" class="btn btn-primary mt-4" style="margin-left: 6px;">Registration</button>
-        </form>
-      </div>
+          <button type="submit" class="btn btn-primary mt-4" > Log in </button>
+          <p>New User? <button (click)="showRegistrationWindow = true" class="btn btn-primary" >Sign in</button></p>
+      </form>
     </div>
 </ng-template>
 
-<ng-template #registerWindow class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter username">
+<ng-template #registerWindow>
+  <div class="row justify-content-center mt-5" style="width: 99%;">
+    <div class="reg-container">
+      <h2>Login Form</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-item">
+              <span class="material-icons-outlined">
+                  account_circle
+                  </span>
+              <input type="text" name="text" id="text" formControlName="username" placeholder="Username or email">
+          </div>
+          <div class="form-item">
+              <span class="material-icons-outlined">                   
+                  lock
+                  </span>
+              <input type="password" name="pass" id="pass" formControlName="password" placeholder="Password">
+          </div>
+          <div class="form-item">
+            <span class="material-icons-outlined">                   
+                lock
+                </span>
+            <input type="password" name="pass" id="pass" formControlName="confirmPassword" placeholder="Repeat password">
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
-        </div>
-        <div class="form-group">
-          <label for="password">Confirm password</label>
-          <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-top: 6px;">Sing up</button>
-        <button (click)="showRegistrationWindow = false" class="btn btn-primary" style="margin-top: 6px;  margin-left: 6px;">I have an account!</button>
+          <button type="submit" class="btn btn-primary mt-4" > Sign up </button>
+          <p>Have an account? <button (click)="showRegistrationWindow = false" class="btn btn-primary" >Log in</button></p>
       </form>
-    </div>
+  </div>
   </div>
 </ng-template>
 

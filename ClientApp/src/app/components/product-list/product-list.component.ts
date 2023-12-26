@@ -24,7 +24,7 @@ export class ProductListComponent {
         this.productData = data;
         setTimeout(()=> {
           this.isLoading = false;
-        }, 4000);
+        }, 3000);
       }
     );
   }
