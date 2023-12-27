@@ -1,0 +1,24 @@
+<div class="container main-container ">
+    <div class="row row-cols-12">
+        <div class="home-description col-md-6">
+            <h3>The best way to xyz on abc with your friends!</h3>
+            <span> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </span>
+            <br>
+        </div>
+        <div class="home-login col-md-6">
+            <app-login></app-login>
+        </div>
+    </div>
+    <div class="Authors row row-cols-2">
+        <div class="col" *ngFor="let author of authors" >
+            <div class="row row-cols-9">
+                <div class="author-pfp col-md-3"><!-- TODO: Fetch and display a pfp --></div>
+                <div class="author-info row-cols-6">
+                    <span class="author-name">{{author.name}}</span><br>
+                    <span class="author-description">{{author.description}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

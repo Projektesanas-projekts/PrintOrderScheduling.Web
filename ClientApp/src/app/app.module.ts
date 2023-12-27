@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms'
@@ -23,6 +24,7 @@ import { BookLoaderComponent } from './helpers/book-loader/book-loader.component
     LoginComponent,
     ProductListComponent,
     ProductFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
