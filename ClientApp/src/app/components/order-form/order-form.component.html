@@ -1,0 +1,65 @@
+<div class="container main-container ">
+    <h2>Calculate printing costs</h2>
+    <form (ngSubmit)="onSubmit()">
+        <h3>Book Properties</h3>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Number of pages
+            </div>
+            <input class="form-field col-md-3" type="number" name="numopag" id="numopag" formControlName="numopag">
+        </div>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Cover type
+            </div>
+            <select class="form-field col-md-3"  id="cover-type" name="cover-type">
+                <option value="select">Choose cover type</option>
+                <option value="hard">Hard</option>
+                <option value="soft">Soft</option>
+                <option value="newspaper">Newspaper</option>
+            </select>
+        </div>
+
+        
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                First page type
+            </div>
+            <select class="form-field col-md-3"  id="first-page-type" name="first-page-type">
+                <option value="select">Choose type</option>
+                <option value="temp">Template</option>
+            </select>
+        </div>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Paper quality
+            </div>
+            <select class="form-field col-md-3"  id="paper-quality" name="paper-quality">
+                <option value="select">Choose paper</option>
+                <option value="temp">Template</option>
+            </select>
+        </div>
+        <h3>Printing properties</h3>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Number of books
+            </div>
+            <input class="form-field col-md-3" type="number" name="number-of-books" id="number-of-books" formControlName="number-of-books">
+        </div>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Printing priority
+            </div>
+            <select class="form-field col-md-3"  id="print-priority" name="print-priority" disabled>
+                <option value="select">Low</option>
+                <option value="hard">Normal</option>
+                <option value="soft">Urgent</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4" > Submit </button>
+    </form>
+    <div *ngIf="orderFormReady">
+        <span>Costs: </span>
+        <span>ETA: </span>
+    </div>
+  </div>
