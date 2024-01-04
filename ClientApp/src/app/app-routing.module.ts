@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'login', component:LoginComponent},
   {path: 'products', component:ProductListComponent, canActivate: [AuthGuard]},
+  // {path: 'order-form', component:OrderFormComponent, canActivate: [AuthGuard]},
   {
     path: 'service',
     loadChildren: () => import('./modules/product-service/product-service.module').then(m => m.ProductServiceModule),

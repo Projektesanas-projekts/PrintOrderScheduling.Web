@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 
@@ -11,6 +11,10 @@ export class AppComponent {
   isLoggedIn: boolean = false;
 
   constructor(private authService: AuthService, private router : Router) {
+    localStorage.clear()
+  }
+
+  ngOnInit(): void {
     this.authService.logInState$.subscribe((val: boolean) => {
       this.isLoggedIn = val;
     })

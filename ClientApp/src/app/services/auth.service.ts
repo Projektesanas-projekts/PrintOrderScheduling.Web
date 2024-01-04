@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   private isAuthenticated = false;
@@ -17,38 +18,36 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private toastr: ToastrService
-  ) { 
-    this.isAuthenticated = !!localStorage.getItem(this.authSecretKey);
-  }
+  ) { }
   
   // Use this to send req with validation
-  // logIn(username: string, password: string): any {
-  //   let formData = new FormData();
-  //   formData.append('username', username);
-  //   formData.append('password', password);
-
-  //   this.http.post("http://localhost:8080/api/user/authenticate", formData).subscribe((response: any) => {
-  //     this.logInState.next(response)
-  //     if(response) {
-  //       const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
-  //       localStorage.setItem(this.authSecretKey, authToken);
-  //       this.toastr.success("Welcome, " + username + "!");
-  //       this.isAuthenticated = true;
-  //     } else {
-  //       this.toastr.error("Wrong username or password!");
-  //     }
-  //   });
-  // }
-
-  // Use this to login without validation (just type anything in username and pass fields)
-
   logIn(username: string, password: string): any {
-      this.logInState.next(true)
+    let formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    this.http.post("http://localhost:8080/api/user/authenticate", formData).subscribe((response: any) => {
+      this.logInState.next(response)
+      if(response) {
         const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
         localStorage.setItem(this.authSecretKey, authToken);
         this.toastr.success("Welcome, " + username + "!");
         this.isAuthenticated = true;
+      } else {
+        this.toastr.error("Wrong username or password!");
+      }
+    });
   }
+
+  // Use this to login without validation (just type anything in username and pass fields)
+
+  // logIn(username: string, password: string): any {
+  //     this.logInState.next(true)
+  //       const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
+  //       localStorage.setItem(this.authSecretKey, authToken);
+  //       this.toastr.success("Welcome, " + username + "!");
+  //       this.isAuthenticated = true;
+  // }
   
   addUser(username: string, password: string): void {
     let formData = new FormData();
@@ -65,7 +64,7 @@ export class AuthService {
   }
 
   isAuthenticatedUser(): boolean {
-    return this.isAuthenticated;
+    return localStorage.getItem(this.authSecretKey) ? true : false;
   }
 
   logout(): void {
