@@ -7,7 +7,7 @@ import { Order } from '../components/order-form/order';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'https://fakestoreapi.com';
+  private apiUrl = 'http://localhost:8080';
   private authSecretKey = 'Bearer Token';
 
   private currentProduct = new BehaviorSubject<any>(null);
@@ -19,30 +19,21 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  private getHeaders(): HttpHeaders {
-    const authToken = localStorage.getItem(this.authSecretKey);
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`
-    });
-  }
-
   getProducts() : Observable<any[]>{
-    const headers = this.getHeaders();
-    return this.http.get<any[]>(`${this.apiUrl}/products`, { headers });
+    return this.http.get<Order[]>(`http://localhost:8080/api/order/all`);
   }
 
   addNewOrder(): void {
     //TODO: Change to form data
     let orderForm: Order = {
-      amount: 1,
-      pageCount: 20,
-      coverType: "Strong",
-      bookName: "TestBook",
-      bindingType: "Strong",
+      amount: 4,
+      pageCount: 100,
+      coverType: "Weak",
+      bookName: "TestBook2",
+      bindingType: "QAEf",
       format: "Format",
-      sizeX: 220,
-      sizeY: 150
+      sizeX: 240,
+      sizeY: 110
     }
     
     this.http.post("http://localhost:8080/api/order/create", orderForm).subscribe((response: any) => {
@@ -50,16 +41,9 @@ export class ProductService {
         this.orderSubmitionSuccess.next(true);
       }
     });
-
   }
 
   selectProduct(product: any) {
     this.currentProduct.next(product);
-  }
-
-
-  getProductDetailById(id : number){
-    const headers = this.getHeaders();
-    return this.http.get(`${this.apiUrl}/products/` + id, { headers })
   }
 }

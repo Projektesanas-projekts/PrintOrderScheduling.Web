@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { BookLoaderComponent } from './helpers/book-loader/book-loader.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { BookLoaderComponent } from './helpers/book-loader/book-loader.component
     ToastrModule.forRoot({
       positionClass: 'toast-center-center',
     }),
+    MatTableModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
