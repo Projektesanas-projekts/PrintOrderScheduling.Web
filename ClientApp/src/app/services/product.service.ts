@@ -7,7 +7,7 @@ import { Order } from '../components/order-form/order';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'http://localhost:8080/';
   private authSecretKey = 'Bearer Token';
 
   private currentProduct = new BehaviorSubject<any>(null);
@@ -24,23 +24,25 @@ export class ProductService {
     const params = new HttpParams().set('id', userId.toString());
 
     // Make the GET request with the parameters
-    return this.http.get<Order[]>(`http://localhost:8080/api/order/all`, { params });
+    return this.http.get<Order[]>("http://localhost:8080/api/order/all", { params });
 }
 
-  addNewOrder(): void {
+  addNewOrder(orderForm: Order): void {
     //TODO: Change to form data
-    let orderForm: Order = {
-      userId: 152,
-      amount: 4,
-      pageCount: 100,
-      coverType: "Weak",
-      bookName: "TestBook2",
-      bindingType: "QAEf",
-      format: "Format",
-      sizeX: 240,
-      sizeY: 110
-    }
-    
+    // let orderForm = new Order(
+    //   152,
+    //   4,
+    //   100,
+    //   "Weak",
+    //   "TestBook2",
+    //   "QAEf",
+    //   "Format",
+    //   240,
+    //   110
+    // )
+
+    console.log(orderForm);
+
     this.http.post("http://localhost:8080/api/order/create", orderForm).subscribe((response: any) => {
       if(response) {
         this.orderSubmitionSuccess.next(true);

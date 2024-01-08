@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
 import { CALC_CONFIG } from './calc-config'
 import { Order } from './order';
+import { ProductService } from 'src/app/services/product.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-order-form',
@@ -19,10 +21,14 @@ export class OrderFormComponent{
   
   eta: any = null;
   price: any = null;
+  userId: number = 0;
 
   constructor(
-    private fb: FormBuilder
-  ){}
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private authService: AuthService,
+  ){ 
+  }
 
   private round(x: number): number {
     return (Math.round(x*100) / 100);
@@ -37,21 +43,25 @@ export class OrderFormComponent{
       bindingType: ['', Validators.required],
       format: ['', Validators.required],
     });
-    console.log(this.orderForm.valid);
+    
+    this.authService.userId$.subscribe((id: number) => {
+      this.userId = id;
+    });
   }
 
   onSubmit(): void {
 
-    let order: Order = {
-      amount: this.orderForm.get("amount").value,
-      pageCount: this.orderForm.get("pageCount").value,
-      coverType: this.orderForm.get("coverType").value,
-      bookName: this.orderForm.get("bookName").value,
-      bindingType: this.orderForm.get("bindingType").value,
-      format: this.orderForm.get("format").value,
-      sizeX: 240,
-      sizeY: 110
-    }
+    let order = new Order(
+      this.userId,
+      this.orderForm.get("amount").value,
+      this.orderForm.get("pageCount").value,
+      this.orderForm.get("coverType").value,
+      this.orderForm.get("bookName").value,
+      this.orderForm.get("bindingType").value,
+      this.orderForm.get("format").value,
+      240,
+      110
+    )
 
     this.price = (order.pageCount * CALC_CONFIG.pageCost * order.amount)
     * CALC_CONFIG.pageFormatMulti[order.format]
@@ -65,9 +75,7 @@ export class OrderFormComponent{
 
     this.eta = this.round(this.eta)
 
-
-
-    //TODO: Send order to Backend
+    this.productService.addNewOrder(order);
   }
 
 }
