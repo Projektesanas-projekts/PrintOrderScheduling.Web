@@ -15,6 +15,9 @@ export class AuthService {
   private logInState = new BehaviorSubject<any>(false);
   logInState$ = this.logInState.asObservable();
 
+  private userId = new BehaviorSubject<number>(0);
+  userId$ = this.userId.asObservable();
+
   constructor(
     private http: HttpClient,
     private toastr: ToastrService
@@ -27,8 +30,9 @@ export class AuthService {
     formData.append('password', password);
 
     this.http.post("http://localhost:8080/api/user/authenticate", formData).subscribe((response: any) => {
-      this.logInState.next(response)
+      this.userId.next(response)
       if(response) {
+        this.logInState.next(true)
         const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
         localStorage.setItem(this.authSecretKey, authToken);
         this.toastr.success("Welcome, " + username + "!");

@@ -1,4 +1,5 @@
 export class Order {
+    userId!: number;
     amount!: number;
     pageCount!: number;
     coverType!: string;

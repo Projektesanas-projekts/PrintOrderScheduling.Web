@@ -11,7 +11,7 @@ export class AppComponent {
   isLoggedIn: boolean = false;
 
   constructor(private authService: AuthService, private router : Router) {
-    // localStorage.clear()
+    localStorage.clear()
   }
 
   ngOnInit(): void {

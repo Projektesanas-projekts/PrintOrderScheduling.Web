@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Order } from '../components/order-form/order';
@@ -19,13 +19,18 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  getProducts() : Observable<any[]>{
-    return this.http.get<Order[]>(`http://localhost:8080/api/order/all`);
-  }
+  getProducts(userId: number): Observable<Order[]> {
+    // Create HTTP parameters
+    const params = new HttpParams().set('id', userId.toString());
+
+    // Make the GET request with the parameters
+    return this.http.get<Order[]>(`http://localhost:8080/api/order/all`, { params });
+}
 
   addNewOrder(): void {
     //TODO: Change to form data
     let orderForm: Order = {
+      userId: 152,
       amount: 4,
       pageCount: 100,
       coverType: "Weak",
