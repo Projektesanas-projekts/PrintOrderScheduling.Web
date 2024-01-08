@@ -50,7 +50,6 @@ export class OrderFormComponent{
   }
 
   onSubmit(): void {
-
     let order = new Order(
       this.userId,
       this.orderForm.get("amount").value,
