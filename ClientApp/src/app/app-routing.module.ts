@@ -4,13 +4,14 @@ import { LoginComponent } from './components/login/login.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './components/home/home.component';
+import { OrderFormComponent } from './components/order-form/order-form.component';
 
 const routes: Routes = [
   {path: '', component:ProductListComponent, pathMatch:'full', canActivate: [AuthGuard]},
   {path: 'home', component:HomeComponent},
-  {path: 'login', component:LoginComponent},
+  {path: 'login', component:LoginComponent, canActivate:[false]},
   {path: 'products', component:ProductListComponent, canActivate: [AuthGuard]},
-  // {path: 'order-form', component:OrderFormComponent, canActivate: [AuthGuard]},
+  {path: 'order-form', component:OrderFormComponent, canActivate: [AuthGuard]},
   {
     path: 'service',
     loadChildren: () => import('./modules/product-service/product-service.module').then(m => m.ProductServiceModule),
