@@ -1,16 +1,18 @@
 export class Order {
-    userId!: number;
-    amount!: number;
-    pageCount!: number;
-    coverType!: string;
-    bookName!: string;
-    bindingType!: string;
-    format!: string;
-    sizeX!: number;
-    sizeY!: number;
+    userId: number;
+    amount: number;
+    pageCount: number;
+    coverType: string;
+    bookName: string;
+    bindingType: string;
+    format: string;
+    sizeX: number;
+    sizeY: number;
+    status: string;
+    id: any;
 
     constructor(userId: number, amount: number, pageCount: number, coverType: string, 
-        bookName: string, bindingType: string, format: string, sizeX: number, sizeY: number){
+        bookName: string, bindingType: string, format: string, sizeX: number, sizeY: number, status: string, id = null){
 
     this.userId= userId;
     this.amount= amount;
@@ -21,6 +23,8 @@ export class Order {
     this.format= format;
     this.sizeX= sizeX;
     this.sizeY= sizeY;
+    this.status = status;
+    this.id = id;
     }
 }
 

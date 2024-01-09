@@ -15,22 +15,26 @@ export class ProductListComponent {
   constructor(
     private productService : ProductService,
     private dialogRef : MatDialog,
-    private authService: AuthService) { }
+    private authService: AuthService) { 
+    }
 
-  displayedColumns: string[] = ['bookName', 'pageCount', 'coverType', 'bindingType'];
+  displayedUserColumns: string[] = ['bookName', 'pageCount', 'coverType', 'bindingType','proceed', 'decline'];
+  displayedAdminColumns: string[] = ['bookName', 'pageCount', 'coverType', 'bindingType',];
   
   productData : any;
   isProductSelected: boolean = false;
   isLoading: boolean = true;
   userId: number = 0;
+  isAdmin: boolean = false;
 
   ngOnInit(): void {
     this.authService.userId$.subscribe((id: number) => {
       this.userId = id;
+      this.userId == 252 ? this.isAdmin = true : this.isAdmin = false;
     });
 
     this.productService.getProducts(this.userId).subscribe((data: Order[]) => {
-      this.productData = data.filter(item => item.userId == this.userId);
+      this.userId != 252 ? this.productData = data.filter(item => item.userId == this.userId) : this.productData = data;
         setTimeout(()=> {
           this.isLoading = false;
         }, 3000);
@@ -47,6 +51,10 @@ export class ProductListComponent {
   selectProduct(product: any) {
     this.productService.selectProduct(product);
     this.openModal()
+  }
+
+  onDecline(order: Order): void {
+    this.productService.declineOrder(order.id)
   }
 
 }

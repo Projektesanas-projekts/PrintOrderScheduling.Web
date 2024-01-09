@@ -16,6 +16,9 @@ export class ProductService {
   private orderSubmitionSuccess = new BehaviorSubject<boolean>(false);
   orderSubmitionSuccess$ = this.orderSubmitionSuccess.asObservable();
 
+  private orderDeletionSuccess = new BehaviorSubject<boolean>(false);
+  orderDeletionSuccess$ = this.orderDeletionSuccess.asObservable();
+
   constructor(private http: HttpClient) {
   }
 
@@ -43,11 +46,19 @@ export class ProductService {
 
     console.log(orderForm);
 
-    this.http.post("http://localhost:8080/api/order/create", orderForm).subscribe((response: any) => {
+    this.http.post("http://localhost:8080/api/order/create", orderForm).subscribe((response) => {
       if(response) {
         this.orderSubmitionSuccess.next(true);
       }
     });
+  }
+
+  declineOrder(id: number): void {
+    this.http.post("localhost:8080/api/order/delete", id).subscribe((respone) => {
+      if(respone) {
+        this.orderDeletionSuccess.next(true)
+      }
+    })
   }
 
   selectProduct(product: any) {
