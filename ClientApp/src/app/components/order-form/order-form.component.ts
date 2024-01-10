@@ -61,6 +61,8 @@ export class OrderFormComponent{
       240,
       110,
       "Waiting",
+      null,
+      null
     )
 
     this.price = (order.pageCount * CALC_CONFIG.pageCost * order.amount)

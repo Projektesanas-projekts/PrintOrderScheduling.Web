@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/product.service';
+import { Order } from '../order-form/order';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-form',
@@ -9,31 +11,29 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent {
-
-  productForm: FormGroup;
-  product: any
+  product!: Order;
+  notes!: string;
 
   constructor(
     private productService: ProductService,
     private dialogRef : MatDialog,
-    private formBuilder: FormBuilder
+    private toastr: ToastrService
   ) {
 
-    this.productForm = this.formBuilder.group({
-      title: [''],  // Use FormBuilder to create form controls
-      description: [''],
-      price: [''],
-      rating: ['']
-    });
   }
 
   ngOnInit() {
     this.productService.currentProduct$.subscribe(product => {
       if (product) {
-        this.productForm.patchValue(product);
-        console.log(product)
+        this.product = product;
       }
     });
+  }
+
+  submitForm(): void {
+    this.productService.declineOrder(this.product.id, this.notes);
+    this.toastr.info("Order has been successfully declined. The worker will receive a notification.");
+    this.closeModal();
   }
 
   closeModal() {

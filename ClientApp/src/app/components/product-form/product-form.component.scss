@@ -1,0 +1,46 @@
+
+div {
+    border: 2px solid #b90606;
+}
+
+textarea  {
+    padding: 70px 20px;
+    border: 0;
+    font-size: 48px;
+    height: 65%;
+    width: 100%;
+    background-color: #16191C;
+    color: rgb(189, 198, 206);
+    text-align: center; /* Center text horizontally */
+    align-items: end;
+    resize: none;
+    overflow: hidden;
+}
+
+button {
+    border: 2px solid aliceblue;
+    margin-left: 10px;
+    background-color: #16191C;
+    color: white;
+    padding: 5px 10px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+textarea:focus {
+    outline: none;
+    border: none;
+}
+
+.content {
+    height: 100%;
+    background-color: #16191C;
+}
+
+
+h2 {
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+    padding-top: 30px;
+}

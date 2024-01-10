@@ -10,9 +10,10 @@ export class Order {
     sizeY: number;
     status: string;
     id: any;
+    notes: string;
 
     constructor(userId: number, amount: number, pageCount: number, coverType: string, 
-        bookName: string, bindingType: string, format: string, sizeX: number, sizeY: number, status: string, id = null){
+        bookName: string, bindingType: string, format: string, sizeX: number, sizeY: number, status: string, id = null, notes: any){
 
     this.userId= userId;
     this.amount= amount;
@@ -25,6 +26,7 @@ export class Order {
     this.sizeY= sizeY;
     this.status = status;
     this.id = id;
+    this.notes = notes
     }
 }
 

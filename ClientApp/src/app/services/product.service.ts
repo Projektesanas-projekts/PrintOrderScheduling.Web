@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Order } from '../components/order-form/order';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class ProductService {
   private orderDeletionSuccess = new BehaviorSubject<boolean>(false);
   orderDeletionSuccess$ = this.orderDeletionSuccess.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService) {
   }
 
   getProducts(userId: number): Observable<Order[]> {
@@ -53,12 +56,27 @@ export class ProductService {
     });
   }
 
-  declineOrder(id: number): void {
-    this.http.post("localhost:8080/api/order/delete", id).subscribe((respone) => {
-      if(respone) {
-        this.orderDeletionSuccess.next(true)
+  deleteOrder(id: number): void {
+    let formData = new FormData();
+    formData.append('id', id.toString());
+    this.http.post("http://localhost:8080/api/order/delete", formData).subscribe((response: any) => {
+      if(response) {
+        this.toastr.info("Order was successfully deleted");
       }
-    })
+    });
+  }
+
+  declineOrder(id: number, notes:string = ""): void {
+    console.log(notes)
+    let formData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('status', "Declined");
+    formData.append('notes', notes);
+    this.http.post("http://localhost:8080/api/order/change/status", formData).subscribe((response: any) => {
+      if(response) {
+        console.log(response)
+      }
+    });
   }
 
   selectProduct(product: any) {

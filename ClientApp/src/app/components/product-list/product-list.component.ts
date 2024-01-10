@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
@@ -15,17 +15,20 @@ export class ProductListComponent {
   constructor(
     private productService : ProductService,
     private dialogRef : MatDialog,
-    private authService: AuthService) { 
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef) { 
     }
 
-  displayedUserColumns: string[] = ['bookName', 'pageCount', 'coverType', 'bindingType','proceed', 'decline'];
-  displayedAdminColumns: string[] = ['bookName', 'pageCount', 'coverType', 'bindingType',];
+  displayedAdminColumns: string[] = ['delete', 'bookName', 'pageCount', 'coverType', 'bindingType', 'status', 'proceed', 'decline'];
+  displayedUserColumns: string[] = ['delete', 'bookName', 'pageCount', 'coverType', 'bindingType', 'status', 'notes',];
   
-  productData : any;
+  productData!: Order[];
   isProductSelected: boolean = false;
   isLoading: boolean = true;
   userId: number = 0;
   isAdmin: boolean = false;
+
+
 
   ngOnInit(): void {
     this.authService.userId$.subscribe((id: number) => {
@@ -35,26 +38,44 @@ export class ProductListComponent {
 
     this.productService.getProducts(this.userId).subscribe((data: Order[]) => {
       this.userId != 252 ? this.productData = data.filter(item => item.userId == this.userId) : this.productData = data;
-        setTimeout(()=> {
+        // setTimeout(()=> {
           this.isLoading = false;
-        }, 3000);
+        // }, 3000);
       }
     );
   }
 
   openModal() {
     this.dialogRef.open(ProductFormComponent, {
-      width: '1000px',
+      width: '700px',
+      height: '400px'
     });
   }
 
-  selectProduct(product: any) {
-    this.productService.selectProduct(product);
+  selectProduct(order: any) {
+    this.productService.selectProduct(order);
     this.openModal()
   }
 
   onDecline(order: Order): void {
-    this.productService.declineOrder(order.id)
+    this.selectProduct(order);
+    this.productData.map(item => {
+      if(item.id == order.id) {
+        setTimeout(()=> {
+          item.status = "Declined";
+          this.cdr.detectChanges();
+        }, 500);
+      }
+    });
+  }
+
+  onDelete(order: Order): void {
+    this.productService.deleteOrder(order.id);
+    this.productData.map(item => {
+        this.productData = this.productData.filter(item => item.id != order.id);
+        // Trigger change detection
+        this.cdr.detectChanges();
+    });
   }
 
 }
