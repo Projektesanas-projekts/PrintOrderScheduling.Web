@@ -22,14 +22,14 @@ export class AuthService {
     private http: HttpClient,
     private toastr: ToastrService
   ) { }
-  
+
   // Use this to send req with validation
   logIn(username: string, password: string): any {
     let formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
 
-    this.http.post("http://localhost:8080/api/user/authenticate", formData).subscribe((response: any) => {
+    this.http.post("http://hiype.id.lv:8080/api/user/authenticate", formData).subscribe((response: any) => {
       this.userId.next(response)
       if(response) {
         this.logInState.next(true)
@@ -52,12 +52,12 @@ export class AuthService {
   //       this.toastr.success("Welcome, " + username + "!");
   //       this.isAuthenticated = true;
   // }
-  
+
   addUser(username: string, password: string): void {
     let formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    this.http.post("http://localhost:8080/api/user/create", formData).subscribe((response: any) => {
+    this.http.post("http://hiype.id.lv:8080/api/user/create", formData).subscribe((response: any) => {
       if(response) {
         const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
         localStorage.setItem(this.authSecretKey, authToken);

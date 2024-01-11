@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8080/';
+  private apiUrl = 'http://hiype.id.lv:8080/';
   private authSecretKey = 'Bearer Token';
 
   private currentProduct = new BehaviorSubject<any>(null);
@@ -30,7 +30,7 @@ export class ProductService {
     const params = new HttpParams().set('id', userId.toString());
 
     // Make the GET request with the parameters
-    return this.http.get<Order[]>("http://localhost:8080/api/order/all", { params });
+    return this.http.get<Order[]>("http://hiype.id.lv:8080/api/order/all", { params });
 }
 
   addNewOrder(orderForm: Order): void {
@@ -49,7 +49,7 @@ export class ProductService {
 
     console.log(orderForm);
 
-    this.http.post("http://localhost:8080/api/order/create", orderForm).subscribe((response) => {
+    this.http.post("http://hiype.id.lv:8080/api/order/create", orderForm).subscribe((response) => {
       if(response) {
         this.orderSubmitionSuccess.next(true);
         this.toastr.success("Order is submitted!");
@@ -62,7 +62,7 @@ export class ProductService {
   deleteOrder(id: number): void {
     let formData = new FormData();
     formData.append('id', id.toString());
-    this.http.post("http://localhost:8080/api/order/delete", formData).subscribe((response: any) => {
+    this.http.post("http://hiype.id.lv:8080/api/order/delete", formData).subscribe((response: any) => {
       if(response) {
         this.toastr.info("Order was successfully deleted");
       }
@@ -75,7 +75,7 @@ export class ProductService {
     formData.append('id', id.toString());
     formData.append('status', "Declined");
     formData.append('notes', notes);
-    this.http.post("http://localhost:8080/api/order/change/status", formData).subscribe((response: any) => {
+    this.http.post("http://hiype.id.lv:8080/api/order/change/status", formData).subscribe((response: any) => {
       if(response) {
         console.log(response)
       }
@@ -83,7 +83,7 @@ export class ProductService {
   }
 
   processAllOrders(): Observable<any> {
-    return this.http.post("http://localhost:8080/api/order/process", null);
+    return this.http.post("http://hiype.id.lv:8080/api/order/process", null);
   }
 
   selectProduct(product: any) {
