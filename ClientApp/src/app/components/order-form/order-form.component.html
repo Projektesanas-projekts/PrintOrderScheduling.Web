@@ -61,12 +61,25 @@
             </div>
             <select class="form-field col-md-3"  id="bindingType" name="bindingType" formControlName="bindingType" placeholder="">
                 <option value="">Choose type</option>
-                <option value="saddleStitch">SaddleStitch</option>
-                <option value="perfect">Perfect</option>
-                <option value="spiralCoil">Spiral-coil</option>
+                <option value="SaddleStitch">SaddleStitch</option>
+                <option value="Perfect">Perfect</option>
+                <option value="Spiral-coil">Spiral-coil</option>
             </select>
         </div>
-        <button type="button" (click)="onSubmit()"  [disabled]="!orderForm.valid" class="btn btn-primary mt-4" > Submit </button>  
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Binding time (sec)
+            </div>
+            <input class="form-field col-md-3" type="number" name="bindingTimePer" id="bindingTimePer" min="10" formControlName="bindingTimePer" placeholder="Binding time">
+        </div>
+
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Cutting time (sec)
+            </div>
+            <input class="form-field col-md-3" type="number" name="cuttingTimePer" id="cuttingTimePer" min="10" formControlName="cuttingTimePer" placeholder="Cutting time">
+        </div>
+        <button type="button" (click)="onSubmit()"  [disabled]="!orderForm.valid" class="btn btn-primary mt-4" > Submit </button>       
     </form>
 
   </div>
