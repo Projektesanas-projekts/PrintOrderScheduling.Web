@@ -42,6 +42,9 @@ export class OrderFormComponent{
       bookName: ['', Validators.required],
       bindingType: ['', Validators.required],
       format: ['', Validators.required],
+      cuttingTimePer: ['', Validators.required],
+      bindingTimePer: ['', Validators.required],
+      coveringTimePer: ['', Validators.required],
     });
     
     this.authService.userId$.subscribe((id: number) => {
@@ -62,7 +65,10 @@ export class OrderFormComponent{
       110,
       "Waiting",
       null,
-      null
+      null,
+      this.orderForm.get("cuttingTimePer").value,
+      this.orderForm.get("bindingTimePer").value,
+      this.orderForm.get("coveringTimePer").value,
     )
 
     this.price = (order.pageCount * CALC_CONFIG.pageCost * order.amount)

@@ -16,6 +16,7 @@ th, td {
   background-color: #272727;
 }
 
+
 .button-proceed {
   margin-right: 10px;
   background-color: #00c22a;
@@ -44,6 +45,10 @@ th, td {
 
 .yellow-text {
   color: yellow;
+}
+
+.green-text {
+  color: #00c22a;
 }
 
 .mat-row {

@@ -23,10 +23,16 @@
             </div>
             <select class="form-field col-md-3"  id="coverType" name="coverType"  formControlName="coverType">
                 <option value="">Choose cover type</option>
-                <option value="hard">Hard</option>
-                <option value="soft">Soft</option>
-                <option value="newspaper">Newspaper</option>
+                <option value="Hard">Hard</option>
+                <option value="Soft">Soft</option>
+                <option value="Paper">Paper</option>
             </select>
+        </div>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Covering time (sec.)
+            </div>
+            <input class="form-field col-md-3" type="number" name="amocoveringTimePerunt" id="coveringTimePer" min="10" formControlName="coveringTimePer" placeholder="Covering time">
         </div>
 
         <h3>Printing properties</h3>
@@ -44,9 +50,8 @@
             </div>
             <select class="form-field col-md-3"  id="format" name="format" formControlName="format">
                 <option value="">Choose format</option>
-                <option value="a5">A5</option>
-                <option value="a4">A4</option>
-                <option value="a6">A6</option>
+                <option value="Album">Album</option>
+                <option value="Portrait">Portrait</option>
             </select>
         </div>
 
@@ -56,18 +61,26 @@
             </div>
             <select class="form-field col-md-3"  id="bindingType" name="bindingType" formControlName="bindingType" placeholder="">
                 <option value="">Choose type</option>
-                <option value="template">Template</option>
+                <option value="SaddleStitch">SaddleStitch</option>
+                <option value="Perfect">Perfect</option>
+                <option value="Spiral-coil">Spiral-coil</option>
             </select>
         </div>
-        <!-- TODO: Change type to "submit" and remove '(click)="onSubmit()"' when submit is sending -->
-        <button type="button" (click)="onSubmit()"  [disabled]="!orderForm.valid" class="btn btn-primary mt-4" > Submit </button> 
-        <div [hidden]="(!orderForm.valid)||(!price)">
-            <h4>Rought estimates</h4>
-            <p>Price: {{ price }}$</p>
-            <p>ETA: {{ eta<=0? "instant" : (eta + "h") }}</p>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Binding time (sec)
+            </div>
+            <input class="form-field col-md-3" type="number" name="bindingTimePer" id="bindingTimePer" min="10" formControlName="bindingTimePer" placeholder="Binding time">
         </div>
-        
-        
+
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Cutting time (sec)
+            </div>
+            <input class="form-field col-md-3" type="number" name="cuttingTimePer" id="cuttingTimePer" min="10" formControlName="cuttingTimePer" placeholder="Cutting time">
+        </div>
+        <!-- TODO: Change type to "submit" and remove '(click)="onSubmit()"' when submit is sending -->
+        <button type="button" (click)="onSubmit()"  [disabled]="!orderForm.valid" class="btn btn-primary mt-4" > Submit </button>       
     </form>
 
   </div>

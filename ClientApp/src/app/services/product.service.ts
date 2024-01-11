@@ -79,6 +79,14 @@ export class ProductService {
     });
   }
 
+  processAllOrders(): void {
+    this.http.post("http://localhost:8080/api/order/process", null).subscribe((response: any) => {
+      if(response) {
+        console.log(response);
+      }
+    })
+  }
+
   selectProduct(product: any) {
     this.currentProduct.next(product);
   }
