@@ -58,14 +58,14 @@
       <ng-container *ngIf="isAdmin" matColumnDef="proceed">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">@if(element.status != 'Declined') {
-          <button mat-button class="button-proceed" (click)="proceedAllOrders()">Proceed order</button>
+          
         }
         </td>
     </ng-container>
 
     <ng-container *ngIf="isAdmin" matColumnDef="decline">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">@if(element.status != 'Declined') {
+        <td mat-cell *matCellDef="let element">@if(element.status != 'Declined' && element.status != 'Complete') {
           <button mat-button class="button-decline" (click)="onDecline(element)">Decline</button>
         }
         </td>
@@ -80,4 +80,8 @@
       }
       
     </table>
+
+    @if(showPlacehoder) {
+      <h1>To create an order, click on "New order" button above</h1>
+    }
   </div>

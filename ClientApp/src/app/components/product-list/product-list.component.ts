@@ -4,6 +4,8 @@ import { ProductService } from 'src/app/services/product.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { Order } from '../order-form/order';
 import { AuthService } from 'src/app/services/auth.service';
+import { NavigationEnd, Route, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -16,17 +18,19 @@ export class ProductListComponent {
     private productService : ProductService,
     private dialogRef : MatDialog,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef) { 
+    private cdr: ChangeDetectorRef,
+    private router: Router) { 
     }
 
-  displayedAdminColumns: string[] = ['delete', 'bookName', 'pageCount', 'coverType', 'bindingType', 'status', 'proceed', 'decline'];
-  displayedUserColumns: string[] = ['delete', 'bookName', 'pageCount', 'coverType', 'bindingType', 'status', 'notes',];
+  displayedAdminColumns: string[] = ['delete', 'bookName', 'pageCount', 'coverType', 'bindingType', 'format', 'amount', 'status', 'proceed', 'decline'];
+  displayedUserColumns: string[] = ['delete', 'bookName', 'pageCount', 'coverType', 'bindingType', 'format', 'amount', 'status', 'notes',];
   
   productData!: Order[];
   isProductSelected: boolean = false;
   isLoading: boolean = true;
   userId: number = 0;
   isAdmin: boolean = false;
+  showPlacehoder: boolean = false;
 
 
 
@@ -38,9 +42,11 @@ export class ProductListComponent {
 
     this.productService.getProducts(this.userId).subscribe((data: Order[]) => {
       this.userId != 252 ? this.productData = data.filter(item => item.userId == this.userId) : this.productData = data;
-        // setTimeout(()=> {
+
+      this.productData.length == 0 ? this.showPlacehoder = true : null;
+        setTimeout(()=> {
           this.isLoading = false;
-        // }, 3000);
+        }, 3000);
       }
     );
   }
@@ -76,10 +82,6 @@ export class ProductListComponent {
         // Trigger change detection
         this.cdr.detectChanges();
     });
-  }
-
-  proceedAllOrders(): void {
-    this.productService.processAllOrders();
   }
 
 }

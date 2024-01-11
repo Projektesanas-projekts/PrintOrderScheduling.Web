@@ -19,6 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BookLoaderComponent } from './helpers/book-loader/book-loader.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon'
+import { OrderProcessModalComponent } from './helpers/order-process-modal/order-process-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon'
     LoginComponent,
     ProductListComponent,
     ProductFormComponent,
-    HomeComponent
+    HomeComponent,
+    OrderProcessModalComponent
   ],
   imports: [
     BrowserModule,

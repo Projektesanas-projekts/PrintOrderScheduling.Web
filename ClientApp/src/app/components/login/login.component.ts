@@ -50,7 +50,7 @@ export class LoginComponent {
         this.authService.addUser(this.registerForm.get('username').value, this.registerForm.get('password').value)
       } else {
         this.registerPasswordMismatch = true;
-        this.toastr.error("Password mismatch or whatever, change me later");
+        this.toastr.error("Password mismatch, try again!");
       }
     }
   }

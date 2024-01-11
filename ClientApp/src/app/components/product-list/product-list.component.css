@@ -51,6 +51,14 @@ th, td {
   color: #00c22a;
 }
 
+h1 {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  color: #949494;
+  text-align: center;
+}
+
 .mat-row {
   height: auto;
 }

@@ -20,7 +20,10 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li  class="nav-item nav-button logout">
+        <li *ngIf="isLoggedIn && isAdmin" class="nav-item nav-button process">
+          <a class="nav-link" (click)="openModal()">Process All</a>
+        </li>
+        <li *ngIf="isLoggedIn" class="nav-item nav-button logout">
           <mat-icon class="nav-icon">exit_to_app</mat-icon>
           <a class="nav-link logout-link" (click)="logout()">Logout</a>
         </li>
