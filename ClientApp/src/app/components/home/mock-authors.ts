@@ -7,5 +7,5 @@ export const AUTHORS: Author[] = [
     {pfp: "./assets/NikitaT.png", name: "Nikita", description: "Contributed by making some html pages, styles and some basic angular functionality for those pages"},
     {pfp: "./assets/OlegsF.png", name: "Olegs", description: "Person incharge of Front-End. All complex tasks and issues where resolved by him"},
     {pfp: "./assets/RihardsL.png", name: "Rihards", description: "Contributed by providing general help with simple tasks and research"},
-    {pfp: "./assets/SergejsS.png", name: "Sergejs", description: "Person incharge of math releted stuff when it comes to developing the algorith for the progect as well asgeneral research"}
+    {pfp: "./assets/SergejsS.png", name: "Sergejs", description: "Person in charge of math-related stuff when it comes to developing the algorithm for the project as well as general research"}
 ];
