@@ -17,6 +17,9 @@ textarea:focus {
     outline: none;
     border: none;
 }
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #16191C !important;
+}
 
 .content {
     height: 100%;

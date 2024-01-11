@@ -20,6 +20,12 @@ export class ProductListComponent {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private router: Router) { 
+      this.productService.refreshGrid$.subscribe((refresh) => {
+        if(refresh) {
+          console.log("triggered");
+          this.getOrders();
+        }
+      })
     }
 
   displayedAdminColumns: string[] = ['delete', 'bookName', 'pageCount', 'coverType', 'bindingType', 'format', 'amount', 'status', 'proceed', 'decline'];
@@ -32,20 +38,24 @@ export class ProductListComponent {
   isAdmin: boolean = false;
   showPlacehoder: boolean = false;
 
-
-
   ngOnInit(): void {
     this.authService.userId$.subscribe((id: number) => {
       this.userId = id;
       this.userId == 252 ? this.isAdmin = true : this.isAdmin = false;
     });
 
+
+    this.getOrders();
+  }
+
+  getOrders(): void {
     this.productService.getProducts(this.userId).subscribe((data: Order[]) => {
       this.userId != 252 ? this.productData = data.filter(item => item.userId == this.userId) : this.productData = data;
 
       this.productData.length == 0 ? this.showPlacehoder = true : null;
         setTimeout(()=> {
           this.isLoading = false;
+          this.cdr.detectChanges();
         }, 2300);
       }
     );

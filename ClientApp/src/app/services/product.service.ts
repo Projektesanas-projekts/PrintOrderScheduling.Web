@@ -20,6 +20,11 @@ export class ProductService {
   private orderDeletionSuccess = new BehaviorSubject<boolean>(false);
   orderDeletionSuccess$ = this.orderDeletionSuccess.asObservable();
 
+
+  private refreshGrid = new BehaviorSubject<boolean>(false);
+  refreshGrid$ = this.refreshGrid.asObservable();
+  
+
   constructor(
     private http: HttpClient,
     private toastr: ToastrService) {
@@ -83,6 +88,9 @@ export class ProductService {
   }
 
   processAllOrders(): Observable<any> {
+    setTimeout(()=> {
+      this.refreshGrid.next(true);
+    }, 1000)
     return this.http.post("http://hiype.id.lv:8080/api/order/process", null);
   }
 
