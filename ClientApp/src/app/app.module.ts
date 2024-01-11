@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { BookLoaderComponent } from './helpers/book-loader/book-loader.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon'
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MatTableModule } from '@angular/material/table';
     ToastrModule.forRoot({
       positionClass: 'toast-center-center',
     }),
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

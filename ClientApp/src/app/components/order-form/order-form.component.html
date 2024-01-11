@@ -14,7 +14,7 @@
             <div class="label col-md-3">
                 Number of pages
             </div>
-            <input class="form-field col-md-3" type="number" name="pageCount" id="pageCount" min="50" formControlName="pageCount" placeholder="Pages per book">
+            <input class="form-field col-md-3" type="number" name="pageCount" id="pageCount" min="20" formControlName="pageCount" placeholder="Pages per book">
         </div>
 
         <div class= "form-item row row-cols-6">
@@ -79,7 +79,6 @@
             </div>
             <input class="form-field col-md-3" type="number" name="cuttingTimePer" id="cuttingTimePer" min="10" formControlName="cuttingTimePer" placeholder="Cutting time">
         </div>
-        <!-- TODO: Change type to "submit" and remove '(click)="onSubmit()"' when submit is sending -->
         <button type="button" (click)="onSubmit()"  [disabled]="!orderForm.valid" class="btn btn-primary mt-4" > Submit </button>       
     </form>
 

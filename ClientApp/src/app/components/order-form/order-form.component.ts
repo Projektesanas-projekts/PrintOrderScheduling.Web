@@ -61,8 +61,8 @@ export class OrderFormComponent{
       this.orderForm.get("bookName").value,
       this.orderForm.get("bindingType").value,
       this.orderForm.get("format").value,
-      240,
-      110,
+      0,
+      0,
       "Waiting",
       null,
       null,
@@ -70,18 +70,6 @@ export class OrderFormComponent{
       this.orderForm.get("bindingTimePer").value,
       this.orderForm.get("coveringTimePer").value,
     )
-
-    this.price = (order.pageCount * CALC_CONFIG.pageCost * order.amount)
-    * CALC_CONFIG.pageFormatMulti[order.format]
-    + CALC_CONFIG.pageBindingPrice[order.bindingType]
-    + CALC_CONFIG.coverTypePrice[order.coverType];
-
-    this.price = this.round(this.price);
-
-    this.eta = ((order.pageCount * CALC_CONFIG.pageTime * order.amount)
-    * CALC_CONFIG.pageFormatMulti[order.format])/(60*60);
-
-    this.eta = this.round(this.eta)
 
     this.productService.addNewOrder(order);
   }
