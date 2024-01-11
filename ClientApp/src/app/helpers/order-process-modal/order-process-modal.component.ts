@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Order } from 'src/app/components/order-form/order';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,7 +23,7 @@ export class OrderProcessModalComponent {
   constructor(
     private productService: ProductService,
     private dialogRef : MatDialog,
-    private toastr: ToastrService,
+    private router: Router,
     public authService: AuthService,
     public cdr: ChangeDetectorRef
   ) {
@@ -48,6 +49,7 @@ export class OrderProcessModalComponent {
             });
             this.total = this.total + item.sizeX*item.sizeY;
           });
+          this.router.navigate(['/product-list']);
         });
       }
     });

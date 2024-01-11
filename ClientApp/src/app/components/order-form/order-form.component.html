@@ -1,84 +1,89 @@
 <div class="container main-container ">
     <h2>Calculate printing costs</h2>
     <form [formGroup]="orderForm">
-        <h3>Book Properties</h3>
+        <div class="form-section top-section">
+            <h3>Book Properties</h3>
 
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Book name 
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Book name 
+                </div>
+                <input class="form-field col-md-3" type="text" name="bookName" id="bookName" formControlName="bookName" placeholder="Name the book">
             </div>
-            <input class="form-field col-md-3" type="text" name="bookName" id="bookName" formControlName="bookName" placeholder="Name the book">
-        </div>
 
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Number of pages
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Number of pages
+                </div>
+                <input class="form-field col-md-3" type="number" name="pageCount" id="pageCount" min="20" formControlName="pageCount" placeholder="Pages per book">
             </div>
-            <input class="form-field col-md-3" type="number" name="pageCount" id="pageCount" min="20" formControlName="pageCount" placeholder="Pages per book">
-        </div>
 
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Cover type
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Cover type
+                </div>
+                <select class="form-field col-md-3"  id="coverType" name="coverType"  formControlName="coverType">
+                    <option value="">Choose cover type</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Soft">Soft</option>
+                    <option value="Paper">Paper</option>
+                </select>
             </div>
-            <select class="form-field col-md-3"  id="coverType" name="coverType"  formControlName="coverType">
-                <option value="">Choose cover type</option>
-                <option value="Hard">Hard</option>
-                <option value="Soft">Soft</option>
-                <option value="Paper">Paper</option>
-            </select>
-        </div>
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Covering time (sec.)
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Covering time (sec.)
+                </div>
+                <input class="form-field col-md-3" type="number" name="amocoveringTimePerunt" id="coveringTimePer" min="10" formControlName="coveringTimePer" placeholder="Covering time">
             </div>
-            <input class="form-field col-md-3" type="number" name="amocoveringTimePerunt" id="coveringTimePer" min="10" formControlName="coveringTimePer" placeholder="Covering time">
         </div>
+        
+        <div class="form-section bottom-section">
+            <h3>Printing properties</h3>
 
-        <h3>Printing properties</h3>
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Number of books
+                </div>
+                <input class="form-field col-md-3" type="number" name="amount" id="amount" min="10" formControlName="amount" placeholder="Amount of books">
+            </div>
 
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Number of books
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Printing format
+                </div>
+                <select class="form-field col-md-3"  id="format" name="format" formControlName="format">
+                    <option value="">Choose format</option>
+                    <option value="Album">Album</option>
+                    <option value="Portrait">Portrait</option>
+                </select>
             </div>
-            <input class="form-field col-md-3" type="number" name="amount" id="amount" min="10" formControlName="amount" placeholder="Amount of books">
-        </div>
 
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Printing format
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Binding Type
+                </div>
+                <select class="form-field col-md-3"  id="bindingType" name="bindingType" formControlName="bindingType" placeholder="">
+                    <option value="">Choose type</option>
+                    <option value="SaddleStitch">SaddleStitch</option>
+                    <option value="Perfect">Perfect</option>
+                    <option value="Spiral-coil">Spiral-coil</option>
+                </select>
             </div>
-            <select class="form-field col-md-3"  id="format" name="format" formControlName="format">
-                <option value="">Choose format</option>
-                <option value="Album">Album</option>
-                <option value="Portrait">Portrait</option>
-            </select>
-        </div>
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Binding time (sec)
+                </div>
+                <input class="form-field col-md-3" type="number" name="bindingTimePer" id="bindingTimePer" min="10" formControlName="bindingTimePer" placeholder="Binding time">
+            </div>
 
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Binding Type
+            <div class= "form-item row row-cols-6">
+                <div class="label col-md-3">
+                    Cutting time (sec)
+                </div>
+                <input class="form-field col-md-3" type="number" name="cuttingTimePer" id="cuttingTimePer" min="10" formControlName="cuttingTimePer" placeholder="Cutting time">
             </div>
-            <select class="form-field col-md-3"  id="bindingType" name="bindingType" formControlName="bindingType" placeholder="">
-                <option value="">Choose type</option>
-                <option value="SaddleStitch">SaddleStitch</option>
-                <option value="Perfect">Perfect</option>
-                <option value="Spiral-coil">Spiral-coil</option>
-            </select>
         </div>
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Binding time (sec)
-            </div>
-            <input class="form-field col-md-3" type="number" name="bindingTimePer" id="bindingTimePer" min="10" formControlName="bindingTimePer" placeholder="Binding time">
-        </div>
-
-        <div class= "form-item row row-cols-6">
-            <div class="label col-md-3">
-                Cutting time (sec)
-            </div>
-            <input class="form-field col-md-3" type="number" name="cuttingTimePer" id="cuttingTimePer" min="10" formControlName="cuttingTimePer" placeholder="Cutting time">
-        </div>
+        
         <button type="button" (click)="onSubmit()"  [disabled]="!orderForm.valid" class="btn btn-primary mt-4" > Submit </button>       
     </form>
 
