@@ -1,0 +1,46 @@
+.logout-link {
+    cursor: pointer;
+}
+.navbar-expand-lg {
+    border-bottom: 4px solid gray;
+    border-radius: 2px;
+}
+.nav-button{
+    margin-right: 10px;
+    border-width: 1px;
+    color: aliceblue;
+    border-style:groove;
+    padding: 5px 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    
+    &.order-list{
+        color: #F62DAE;
+        border-color: #F62DAE;
+        a{
+            color: #F62DAE; 
+        }
+    }
+    &.new-order{
+        color: #06D6A0; 
+        border-color: #06D6A0;
+        a{
+            color: #06D6A0; 
+        }
+    }
+    &.logout{
+        color: #FD151B; 
+        border-color: #FD151B;
+        a{
+            color: #FD151B; 
+        }
+    }
+}
+
+.nav-icon{
+    width: 34px;
+    height: 34px;
+    padding-top: 9px;
+    padding-left: 7px;
+}

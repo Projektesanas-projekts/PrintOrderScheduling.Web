@@ -52,6 +52,9 @@ export class ProductService {
     this.http.post("http://localhost:8080/api/order/create", orderForm).subscribe((response) => {
       if(response) {
         this.orderSubmitionSuccess.next(true);
+        this.toastr.success("Order is submitted!");
+      } else {
+        this.toastr.error("Cannot submit order!");
       }
     });
   }
