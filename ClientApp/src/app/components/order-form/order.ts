@@ -11,9 +11,15 @@ export class Order {
     status: string;
     id: any;
     notes: string;
+    cuttingTimePer: number;
+    bindingTimePer: number;
+    coveringTimePer: number;
 
-    constructor(userId: number, amount: number, pageCount: number, coverType: string, 
-        bookName: string, bindingType: string, format: string, sizeX: number, sizeY: number, status: string, id = null, notes: any){
+    constructor(
+        userId: number, amount: number, pageCount: number, coverType: string, 
+        bookName: string, bindingType: string, format: string, sizeX: number, sizeY: number,
+        status: string, id = null, notes: any, cuttingTimePer: number, bindingTimePer: number, coveringTimePer: number
+         ){
 
     this.userId= userId;
     this.amount= amount;
@@ -26,7 +32,10 @@ export class Order {
     this.sizeY= sizeY;
     this.status = status;
     this.id = id;
-    this.notes = notes
+    this.notes = notes;
+    this.cuttingTimePer = cuttingTimePer;
+    this.bindingTimePer = bindingTimePer;
+    this.coveringTimePer = coveringTimePer;
     }
 }
 

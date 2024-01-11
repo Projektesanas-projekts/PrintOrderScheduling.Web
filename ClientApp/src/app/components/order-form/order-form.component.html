@@ -23,10 +23,16 @@
             </div>
             <select class="form-field col-md-3"  id="coverType" name="coverType"  formControlName="coverType">
                 <option value="">Choose cover type</option>
-                <option value="hard">Hard</option>
-                <option value="soft">Soft</option>
-                <option value="paper">Paper</option>
+                <option value="Hard">Hard</option>
+                <option value="Soft">Soft</option>
+                <option value="Paper">Paper</option>
             </select>
+        </div>
+        <div class= "form-item row row-cols-6">
+            <div class="label col-md-3">
+                Covering time (sec.)
+            </div>
+            <input class="form-field col-md-3" type="number" name="amocoveringTimePerunt" id="coveringTimePer" min="10" formControlName="coveringTimePer" placeholder="Covering time">
         </div>
 
         <h3>Printing properties</h3>
@@ -44,8 +50,8 @@
             </div>
             <select class="form-field col-md-3"  id="format" name="format" formControlName="format">
                 <option value="">Choose format</option>
-                <option value="album">Album</option>
-                <option value="portrait">Portrait</option>
+                <option value="Album">Album</option>
+                <option value="Portrait">Portrait</option>
             </select>
         </div>
 
@@ -61,7 +67,6 @@
             </select>
         </div>
         <button type="button" (click)="onSubmit()"  [disabled]="!orderForm.valid" class="btn btn-primary mt-4" > Submit </button>  
-        
     </form>
 
   </div>

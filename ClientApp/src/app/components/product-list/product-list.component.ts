@@ -78,4 +78,8 @@ export class ProductListComponent {
     });
   }
 
+  proceedAllOrders(): void {
+    this.productService.processAllOrders();
+  }
+
 }
