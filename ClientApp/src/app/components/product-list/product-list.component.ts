@@ -46,7 +46,7 @@ export class ProductListComponent {
       this.productData.length == 0 ? this.showPlacehoder = true : null;
         setTimeout(()=> {
           this.isLoading = false;
-        }, 3000);
+        }, 2300);
       }
     );
   }

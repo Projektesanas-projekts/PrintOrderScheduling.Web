@@ -48,6 +48,7 @@ export class OrderProcessModalComponent {
               }
             });
             this.total = this.total + item.sizeX*item.sizeY;
+            console.log(this.total)
           });
           this.router.navigate(['/product-list']);
         });
